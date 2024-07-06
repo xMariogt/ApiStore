@@ -1,19 +1,20 @@
-FROM python:3.10.13-alpine3.19
+FROM ubuntu:latest
 
-WORKDIR /app
+WORKDIR /api
+COPY . /api
 
-COPY requirements.txt .
+RUN apt-get update && apt-get install python3 python3-pip -y
 
-RUN apk update && \
-    apk add mariadb-dev pkgconfig build-base && \
-    pip install --no-cache-dir -r requirements.txt
+RUN apt install pkg-config -y
+RUN apt-get install default-libmysqlclient-dev build-essential -y
 
-COPY . .
+RUN pip install --break-system-packages -r requirements.txt
+RUN pip install --break-system-packages mysqlclient
 
-ENV FLASK_APP=app.py \
-    FLASK_ENV=production \
-    FLASK_DEBUG=0 
+ENV FLASK_APP=app.py
+ENV FLASK_ENV=production
+ENV FLASK_DEBUG=0
 
 EXPOSE 5000
 
-CMD ["/bin/sh", "-c", "flask run --host 0.0.0.0 --port 5000"]
+CMD /bin/bash -c "flask run --host 0.0.0.0 --port 5000"

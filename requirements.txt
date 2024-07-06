@@ -19,11 +19,13 @@ jsonschema-specifications==2023.12.1
 MarkupSafe==2.1.5
 marshmallow==3.21.3
 marshmallow-sqlalchemy==1.0.0
+mysqlclient==2.2.4
 packaging==24.1
 pluggy==1.5.0
 Pygments==2.18.0
 PyJWT==2.8.0
 pytest==8.2.2
+python-dotenv==1.0.1
 pytz==2024.1
 referencing==0.35.1
 rpds-py==0.18.1
